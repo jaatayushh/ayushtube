@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AyushTube • Ultra High-Performance Media Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/></svg>">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- Header Navigation -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </div>
+        <span class="brand-name">Ayush<span class="gradient-text">Tube</span></span>
+        <span class="version-tag">STUDIO PRO v2.5</span>
+      </div>
+
+      <div class="header-actions">
+        <button id="historyToggleBtn" class="header-btn" title="Download History">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>History</span>
+          <span id="historyBadge" class="history-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Layout -->
+  <main class="main-content">
+    <div class="container">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="badge-pill">
+          <span class="dot-live"></span>
+          <span>YouTube • Playlists • Shorts • Instagram Reels • 4K & MP3 320k</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Download Media in <br><span class="gradient-text hero-highlight">Master Quality</span>
+        </h1>
+        <p class="hero-subtitle">
+          Next-generation downloader by Ayush. Batch download entire YouTube playlists to ZIP, grab 4K 60fps videos, crystal-clear 320k MP3s, and Instagram reels.
+        </p>
+
+        <!-- Search / Paste Input Box -->
+        <div class="input-card">
+          <form id="urlForm" class="url-form">
+            <div class="input-wrapper">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                id="urlInput" 
+                class="url-input" 
+                placeholder="Paste YouTube video, Playlist, Shorts, or Instagram URL..." 
+                autocomplete="off"
+                spellcheck="false"
+                required
+              />
+              <button type="button" id="pasteBtn" class="btn-paste" title="Paste from clipboard">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Paste</span>
+              </button>
+              <button type="button" id="clearBtn" class="btn-clear hidden" title="Clear input">✕</button>
+            </div>
+            
+            <button type="submit" id="fetchBtn" class="btn-primary">
+              <span class="btn-text">Analyze & Extract</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Quick Samples -->
+          <div class="quick-examples">
+            <span class="examples-label">Try quick samples:</span>
+            <button class="sample-chip" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Rick Astley 4K</button>
+            <button class="sample-chip" data-url="https://www.youtube.com/watch?v=jNQXAC9IVRw">Me at the zoo</button>
+            <button class="sample-chip" data-url="https://www.youtube.com/playlist?list=PLRBp0Fe2GpgnZOm5rCopMAOYhZCPoUyO5">NCS Playlist Sample</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loading State Skeleton -->
+      <div id="loadingState" class="loading-state hidden">
+        <div class="spinner-ring"></div>
+        <div class="loading-text">
+          <h3 id="loadingTitle">Analyzing Media Manifest</h3>
+          <p id="loadingSubtitle">Extracting stream manifests, available codecs, and highest resolution profiles...</p>
+        </div>
+      </div>
+
+      <!-- Error State Notice -->
+      <div id="errorState" class="error-card hidden">
+        <div class="error-icon">⚠️</div>
+        <div class="error-details">
+          <h4 id="errorTitle">Extraction Failed</h4>
+          <p id="errorMessage">Please check the link and try again.</p>
+        </div>
+        <button id="dismissErrorBtn" class="btn-sm">Dismiss</button>
+      </div>
+
+      <!-- Single Video Result Showcase -->
+      <section id="resultSection" class="result-section hidden">
+        <div class="preview-card">
+          <div class="thumbnail-wrapper">
+            <img id="videoThumb" src="" alt="Video Thumbnail" class="video-thumbnail" />
+            <span id="videoDuration" class="duration-badge">00:00</span>
+            <a id="externalYtLink" href="#" target="_blank" rel="noopener" class="yt-pill-link" title="Open in YouTube">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <span>Watch</span>
+            </a>
+          </div>
+
+          <div class="meta-details">
+            <h2 id="videoTitle" class="video-title">Video Title Goes Here</h2>
+            
+            <div class="channel-row">
+              <div class="channel-info">
+                <div class="channel-avatar-icon">👤</div>
+                <span id="videoAuthor" class="channel-name">Channel Name</span>
+              </div>
+              <div class="meta-stats">
+                <span class="stat-pill"><span class="stat-icon">👁️</span> <span id="videoViews">0</span> views</span>
+              </div>
+            </div>
+
+            <p id="videoDesc" class="video-description"></p>
+
+            <div class="meta-badges">
+              <span class="badge-feature">⚡ MP4 & MP3 Available</span>
+              <span class="badge-feature">🚀 Lossless Stream</span>
+              <span class="badge-feature">🛡️ Zero Ads / Clean</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Format Selector Tabs -->
+        <div class="format-container">
+          <div class="format-tabs">
+            <button class="tab-btn active" data-tab="video">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                <line x1="7" y1="2" x2="7" y2="22"></line>
+                <line x1="17" y1="2" x2="17" y2="22"></line>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="2" y1="7" x2="7" y2="7"></line>
+                <line x1="2" y1="17" x2="7" y2="17"></line>
+                <line x1="17" y1="17" x2="22" y2="17"></line>
+                <line x1="17" y1="7" x2="22" y2="7"></line>
+              </svg>
+              <span>Video (MP4 + Audio)</span>
+            </button>
+            <button class="tab-btn" data-tab="audio">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+              <span>Audio (MP3 / Lossless)</span>
+            </button>
+          </div>
+
+          <div id="tabVideo" class="tab-panel active">
+            <div id="videoOptionsGrid" class="options-grid"></div>
+          </div>
+
+          <div id="tabAudio" class="tab-panel">
+            <div id="audioOptionsGrid" class="options-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Playlist Showcase Section -->
+      <section id="playlistSection" class="playlist-section hidden">
+        <div class="playlist-header-card">
+          <div class="playlist-header-thumb">
+            <img id="playlistThumb" src="" alt="Playlist Cover" />
+            <div class="playlist-count-pill">
+              <span id="playlistItemCount">0</span> VIDEOS
+            </div>
+          </div>
+          <div class="playlist-header-meta">
+            <div class="badge-feature">📁 YouTube Playlist Detected</div>
+            <h2 id="playlistTitle" class="playlist-title">Playlist Title</h2>
+            <p id="playlistUploader" class="playlist-author">By Channel</p>
+
+            <!-- Batch Download Action Bar -->
+            <div class="playlist-controls">
+              <div class="format-select-group">
+                <label for="playlistFormatSelect">Download Format:</label>
+                <select id="playlistFormatSelect" class="styled-select">
+                  <option value="audio_mp3_320|audio">🎵 MP3 Audio (320 kbps Studio)</option>
+                  <option value="audio_mp3_192|audio">🎵 MP3 Audio (192 kbps Standard)</option>
+                  <option value="video_720|video">🎬 MP4 Video (720p HD)</option>
+                  <option value="video_1080|video">🎬 MP4 Video (1080p Full HD)</option>
+                </select>
+              </div>
+
+              <button id="downloadPlaylistBtn" class="btn-primary">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span id="batchDownloadBtnText">Download Selected as ZIP</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playlist Selection Controls -->
+        <div class="playlist-items-wrapper">
+          <div class="playlist-toolbar">
+            <div class="select-all-box">
+              <input type="checkbox" id="selectAllCheckbox" checked />
+              <label for="selectAllCheckbox">Select All (<span id="selectedCount">0</span> videos selected)</label>
+            </div>
+          </div>
+
+          <!-- Video Item List -->
+          <div id="playlistItemsList" class="playlist-items-list"></div>
+        </div>
+      </section>
+
+      <!-- Features & Highlights Grid -->
+      <section class="features-section">
+        <h3 class="section-heading">Engineered for Perfection</h3>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon glow-cyan">🎬</div>
+            <h4>True 4K & 1080p60</h4>
+            <p>Direct video + audio multiplexing using FFmpeg v7.1. No silent videos or degraded resolutions.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon glow-pink">🎧</div>
+            <h4>Studio 320kbps MP3</h4>
+            <p>Extracts highest bitrate audio tracks with embedded metadata and album art for clean music playback.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon glow-violet">📁</div>
+            <h4>Full Playlist to ZIP</h4>
+            <p>Select multiple or all videos in any playlist and export directly into a clean, organized ZIP file.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon glow-amber">📱</div>
+            <h4>Shorts & Instagram</h4>
+            <p>Seamlessly handles YouTube Shorts, mobile youtu.be links, and Instagram reels with instant parsing.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Active Download Modal -->
+  <div id="downloadModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </div>
+        <div class="modal-title-group">
+          <h3 id="modalTitle">Preparing Download...</h3>
+          <span id="modalQualityTag" class="quality-pill">1080p MP4</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="status-stage-row">
+          <span id="stageBadge" class="stage-badge downloading">Downloading</span>
+          <span id="progressPercent" class="percent-counter">0%</span>
+        </div>
+
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-label" id="metricDownloadedLabel">Downloaded</span>
+            <span id="metricDownloaded" class="metric-value">0 MB / --</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Speed</span>
+            <span id="metricSpeed" class="metric-value">0 KB/s</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">ETA</span>
+            <span id="metricEta" class="metric-value">--:--</span>
+          </div>
+        </div>
+
+        <div id="modalStatusMsg" class="modal-subtext">
+          Connecting to streaming servers and processing streams...
+        </div>
+
+        <div class="modal-actions">
+          <a id="directSaveBtn" href="#" class="btn-primary w-full hidden">
+            <span>Save File to Device</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </a>
+          <button id="closeModalBtn" class="btn-secondary w-full">Close Window</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download History Drawer -->
+  <div id="historyDrawer" class="history-drawer hidden">
+    <div class="history-header">
+      <h3>Recent Downloads</h3>
+      <div class="history-actions-top">
+        <button id="clearHistoryBtn" class="btn-text-action">Clear All</button>
+        <button id="closeHistoryBtn" class="btn-icon-close">✕</button>
+      </div>
+    </div>
+    <div id="historyList" class="history-list">
+      <div class="history-empty">No downloads yet. Download your first video!</div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <p>AyushTube • Ultra High-Performance Media Downloader & Transcoder Studio.</p>
+      <p class="footer-note">Built for lightning speed, zero advertisements, and lossless quality.</p>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

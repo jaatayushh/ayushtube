@@ -1,0 +1,6 @@
+﻿fastapi>=0.115.0
+uvicorn>=0.32.0
+yt-dlp>=2024.10.0
+imageio-ffmpeg>=0.5.1
+aiofiles>=24.1.0
+requests>=2.32.0

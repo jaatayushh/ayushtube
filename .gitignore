@@ -1,0 +1,23 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+env/
+venv/
+
+# App Downloads & Cache
+downloads/
+*.zip
+*.mp4
+*.mp3
+*.m4a
+*.wav
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
