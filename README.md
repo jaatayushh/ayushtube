@@ -1,4 +1,4 @@
-﻿# OmniTube • Ultra High-Performance YouTube Media Downloader & Studio
+﻿# AyushTube • Ultra High-Performance YouTube Media Downloader & Studio
 
 A full-stack, ad-free web application to download YouTube videos and audio in all qualities up to **4K 60FPS** and **320kbps MP3** with real-time download progress tracking.
 
